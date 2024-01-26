@@ -1,13 +1,29 @@
 #!/usr/bin/env python3
-""" Simple pagination
-"""
-
+""" Simple pagination """
 import csv
+import math
 from typing import List, Tuple
 
 
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """
+    Calulate the start and end indexes for pagination
+
+    Args:
+        page (int): The page number (1-indexed).
+        page_size (int): The number of items per page
+
+    Returns:
+        tuple[int, int]: A tuple contaoining the start and end indexes.
+    """
+    start_index = (page - 1) * page_size
+    end_index = start_index + page_size
+    return start_index, end_index
+
+
 class Server:
-    """Server class to paginate a database of popular baby names.
+    """
+    Server class to paginate a database of popular baby names.
     """
     DATA_FILE = "Popular_Baby_Names.csv"
 
@@ -15,32 +31,33 @@ class Server:
         self.__dataset = None
 
     def dataset(self) -> List[List]:
-        """Cached dataset
+        """ Cached dataset
         """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
-            self.__dataset = dataset[1:]
+                self.__dataset = dataset[1:]
 
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """ Finds the correct indexes to paginate dataset.
         """
-        assert type(page) == int
-        assert type(page_size) == int
-        assert page > 0
-        assert page_size > 0
-        csv_size = len(self.dataset())
-        start, end = index_range(page, page_size)
-        end = min(end, csv_size)
-        if start >= csv_size:
+        Retrieve a page of data from the dataset
+
+        Args:
+            page (int, optiona): The page number (1-indexed).
+            page_size (int, optional): The number of items per page
+
+        Returns:
+            List[List]: A list containing the rows corresponding
+            to the requested page
+        """
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
+        dataset = self.dataset()
+        start_index, end_index = index_range(page, page_size)
+        if start_index >= len(dataset):
             return []
-        return self.dataset()[start:end]
-
-
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """ Returns a tuple containing a start and end index.
-    """
-    return ((page - 1) * page_size, page * page_size)
+        end_index = min(end_index, len(dataset))
+        return dataset[start_index:end_index]
