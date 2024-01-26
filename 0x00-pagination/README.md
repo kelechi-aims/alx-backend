@@ -13,7 +13,7 @@ At the end of this project, you are expected to be able to explain to anyone, **
 - Python version: 3.7
 - OS: Ubuntu 18.04 LTS
 - Coding style: PEP 8 (pycodestyle version 2.5.*)
-- Use of CSV data file: "Popular_Baby_Names.csv"
+- [Use of CSV data file](https://intranet.alxswe.com/rltoken/NBLY6mdKDBR9zWvNADwjjg): "Popular_Baby_Names.csv"
 
 
 ## Resources
