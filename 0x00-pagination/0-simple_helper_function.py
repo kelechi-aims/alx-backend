@@ -2,9 +2,10 @@
 """ Simple helper function that calculates the start and
 end indexes for pagination
 """
+from typing import Tuple
 
 
-def index_range(page: int, page_size: int) -> tuple[int, int]:
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     Calulate the start and end indexes for pagination
 
