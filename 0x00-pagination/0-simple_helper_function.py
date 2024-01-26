@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" Simple helper function that calculates the start and end indexes for pagination
+""" Simple helper function that calculates the start and
+end indexes for pagination
 """
 
 
@@ -16,4 +17,4 @@ def index_range(page: int, page_size: int) -> tuple[int, int]:
     """
     start_index = (page - 1) * page_size
     end_index = start_index + page_size
-    return start_index, end_index   
+    return start_index, end_index
