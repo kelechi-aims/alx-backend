@@ -21,7 +21,7 @@ At the end of this project, you are expected to be able to explain to anyone, **
 - [HATEOAS](#) (https://intranet.alxswe.com/rltoken/tfzcEbTSdMYSYxsspJH_oA)
 
 ## Setup
-- Use the provided data file: "Popular_Baby_Names.csv"
+- [Use the provided data file](https://intranet.alxswe.com/rltoken/NBLY6mdKDBR9zWvNADwjjg): "Popular_Baby_Names.csv"
 
 ## Files and Documentation
 - All files should be interpreted/compiled on Ubuntu 18.04 LTS using Python 3.
