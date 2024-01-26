@@ -4,7 +4,7 @@
 This project focuses on implementing pagination techniques for efficient data retrieval in a backend application. Three main pagination methods are covered: pagination with simple page and page_size parameters, pagination with hypermedia metadata, and pagination in a deletion-resilient manner.
 
 ## Learning Objectives
-### At the end of this project, you are expected to be able to explain to anyone, **without the help of Google**:
+At the end of this project, you are expected to be able to explain to anyone, **without the help of Google**:
 - Understand how to paginate a dataset with simple page and page_size parameters.
 - Implement pagination with hypermedia metadata.
 - Paginate datasets in a deletion-resilient manner.
