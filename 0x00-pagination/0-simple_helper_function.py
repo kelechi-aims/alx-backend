@@ -8,7 +8,7 @@ def index_range(page: int, page_size: int) -> tuple[int, int]:
     Calulate the start and end tindexes for pagination
 
     Args:
-        page (int): The page numberT (i-indexed).
+        page (int): The page number (i-indexed).
         page_size (int): The number of items per page
 
     Returns:
