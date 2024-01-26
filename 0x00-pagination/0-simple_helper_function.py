@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Simple helper function that calculates the start and
 end indexes for pagination
 """
