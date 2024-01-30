@@ -12,16 +12,15 @@ class LIFOCache(BaseCaching):
         self.stack = []
 
     def put(self, key, item):
-        """ Adds an item in the cache """
+        """Add an item in the cache"""
         if key is not None and item is not None:
+            if key in self.cache_data:
+                self.cache_data[key] = item
+                return
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                if key in self.cache_data:
-                    del self.cache_data[key]
-                    self.stack.remove(key)
-                else:
-                    del self.cache_data[self.stack[BaseCaching.MAX_ITEMS - 1]]
-                    discarded_key = self.stack.pop()
-                    print(f"DISCARD: {discarded_key}")
+                discarded_key = self.stack.pop()
+                del self.cache_data[discarded_key]
+                print(f"DISCARD: {discarded_key}")
 
             self.cache_data[key] = item
             self.stack.append(key)
