@@ -17,7 +17,7 @@ Read or watch:
 - [Cache replacement policies - LRU](https://intranet.alxswe.com/rltoken/fjhr6EvFeF3mWwsPQXUKdQ)
 - [Cache replacement policies - MRU](https://intranet.alxswe.com/rltoken/fjhr6EvFeF3mWwsPQXUKdQ)
 - [Cache replacement policies - LFU](https://intranet.alxswe.com/rltoken/fjhr6EvFeF3mWwsPQXUKdQ)
-
+- [caching](https://realpython.com/lru-cache-python/)
 ## Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 - What a caching system is
