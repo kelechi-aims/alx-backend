@@ -2,7 +2,7 @@
 
 ## Short Specializations
 
-### 0x01. Caching
+## 0x01. Caching
 - **Back-end**
 - **By:** Guillaume, CTO at Holberton School
 - **Weight:** 1
@@ -12,11 +12,11 @@ In this project, you learn different caching algorithms.
 
 ## Resources
 Read or watch:
-- Cache replacement policies - FIFO
-- Cache replacement policies - LIFO
-- Cache replacement policies - LRU
-- Cache replacement policies - MRU
-- Cache replacement policies - LFU
+- [Cache replacement policies - FIFO](https://intranet.alxswe.com/rltoken/fjhr6EvFeF3mWwsPQXUKdQ)
+- [Cache replacement policies - LIFO](https://intranet.alxswe.com/rltoken/fjhr6EvFeF3mWwsPQXUKdQ)
+- [Cache replacement policies - LRU](https://intranet.alxswe.com/rltoken/fjhr6EvFeF3mWwsPQXUKdQ)
+- [Cache replacement policies - MRU](https://intranet.alxswe.com/rltoken/fjhr6EvFeF3mWwsPQXUKdQ)
+- [Cache replacement policies - LFU](https://intranet.alxswe.com/rltoken/fjhr6EvFeF3mWwsPQXUKdQ)
 
 ## Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
@@ -80,4 +80,3 @@ class BaseCaching():
         """ Get an item by key
         """
         raise NotImplementedError("get must be implemented in your cache class")
-
