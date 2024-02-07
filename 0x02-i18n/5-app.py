@@ -9,7 +9,6 @@ app = Flask(__name__)
 babel = Babel(app)
 
 
-# Define user table
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
@@ -25,11 +24,9 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-# Use the Config class as the configuration for the Flask app
 app.config.from_object(Config)
 
 
-# Define supported locales using request.accept_languages
 @babel.localeselector
 def get_locale() -> str:
     """Check if locale parameter is present in the request URL."""
@@ -40,7 +37,6 @@ def get_locale() -> str:
         return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-# Define get_user function to get user details based on user ID
 def get_user(user_id: int) -> Dict:
     """
     Function that returns a user dictionary or None
@@ -49,7 +45,6 @@ def get_user(user_id: int) -> Dict:
     return users.get(int(user_id))
 
 
-# Define before_request function to execute before all other functions
 @app.before_request
 def before_request():
     """Function and use the app.before_request decorator to
