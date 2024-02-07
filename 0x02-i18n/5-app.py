@@ -43,14 +43,14 @@ def get_locale() -> str:
 # Define get_user function to get user details based on user ID
 def get_user(user_id: int) -> Dict:
     """ Get user details based on user ID """
-    return users.get(user_id)
+    return users.get(int(user_id))
 
 
 # Define before_request function to execute before all other functions
 @app.before_request
 def before_request():
     """ Check if login_as parameter is present in the request URL """
-    user_id = int(request.args.get('login_as', 0))
+    user_id = (request.args.get('login_as', 0))
     g.user = get_user(user_id)
 
 

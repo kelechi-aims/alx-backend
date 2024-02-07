@@ -54,7 +54,7 @@ def get_locale() -> str:
 # Define get_user function to get user details based on user ID
 def get_user(user_id: int) -> Union[Dict[str, Union[str, None]], None]:
     """ Get user details based on user ID """
-    return users.get(user_id)
+    return users.get(int(user_id))
 
 
 # Define before_request function to execute before all other functions
@@ -64,7 +64,7 @@ def before_request():
     user_id = request.args.get('login_as')
     if user_id:
         # Attempt to get user details based on user ID
-        user = get_user(int(user_id))
+        user = get_user((user_id))
         if user:
             # Set user details as a global on flask.g.user
             g.user = user
@@ -74,6 +74,23 @@ def before_request():
     else:
         # If login_as parameter not present, set g.user to None
         g.user = None
+
+
+SUPPORTED_TIMEZONES = pytz.timezone
+
+
+@babel.timezoneselector
+def get_timezone():
+    """ Infer appropriate time zone """
+    timezone = request.args.get('timezone')
+    if timezone and timezone in SUPPORTED_TIMEZONES:
+        return timezone
+    if (
+        hasattr(g, 'user') and g.user and 'timezone' in g.user and
+        g.user['timezone'] in SUPPORTED_TIMEZONES
+    ):
+        return g.user['timezone']
+    return 'UTC'
 
 
 @app.route('/')
