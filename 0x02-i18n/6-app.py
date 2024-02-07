@@ -32,16 +32,27 @@ app.config.from_object(Config)
 # Define supported locales using request.accept_languages
 @babel.localeselector
 def get_locale() -> str:
-    """ Check if locale parameter is present in the request URL """
+    """ 1. Check if locale parameter is present in the request URL """
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
         return locale
-    else:
-        return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+    # 2. Locale from user settings
+    if (
+        hasattr(g, 'user') and g.user and 'locale' in g.user and
+        g.user['locale'] in app.config['LANGUAGES']
+    ):
+        return g.user['locale']
+
+    # 3. Locale from request headers
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+    # 4. Default locale (fallback if none of the above conditions are met)
+    return app.config['BABEL_DEFAULT_LOCALE']
 
 
 # Define get_user function to get user details based on user ID
-def get_user(user_id: int) -> Dict:
+def get_user(user_id: int) -> Union[Dict[str, Union[str, None]], None]:
     """ Get user details based on user ID """
     return users.get(user_id)
 
