@@ -50,19 +50,8 @@ def get_user(user_id: int) -> Dict:
 @app.before_request
 def before_request():
     """ Check if login_as parameter is present in the request URL """
-    user_id = request.args.get('login_as')
-    if user_id:
-        # Attempt to get user details based on user ID
-        user = get_user(int(user_id))
-        if user:
-            # Set user details as a global on flask.g.user
-            g.user = user
-        else:
-            # If user ID not found, set g.user to None
-            g.user = None
-    else:
-        # If login_as parameter not present, set g.user to None
-        g.user = None
+    user_id = int(request.args.get('login_as', 0))
+    g.user = get_user(user_id)
 
 
 @app.route('/')
