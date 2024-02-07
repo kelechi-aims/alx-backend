@@ -2,6 +2,7 @@
 """ Mock logging in """
 from flask import Flask, render_template, g, request
 from flask_babel import Babel, _
+from typing import Dict, Union
 
 
 app = Flask(__name__)
@@ -30,7 +31,7 @@ app.config.from_object(Config)
 
 # Define supported locales using request.accept_languages
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """ Check if locale parameter is present in the request URL """
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
@@ -38,14 +39,16 @@ def get_locale():
     else:
         return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 # Define get_user function to get user details based on user ID
-def get_user(user_id):
+def get_user(user_id: int) -> Union[Dict[str, Union[str, None]], None]:
     """ Get user details based on user ID """
     return users.get(user_id)
 
+
 # Define before_request function to execute before all other functions
 @app.before_request
-def before_request():
+def before_request() -> None:
     """ Check if login_as parameter is present in the request URL """
     user_id = request.args.get('login_as')
     if user_id:
@@ -63,7 +66,7 @@ def before_request():
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """ rendering index html """
     return render_template('5-index.html')
 
