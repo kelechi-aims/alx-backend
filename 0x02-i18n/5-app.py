@@ -42,14 +42,20 @@ def get_locale() -> str:
 
 # Define get_user function to get user details based on user ID
 def get_user(user_id: int) -> Dict:
-    """Get user details based on user ID"""
+    """
+    Function that returns a user dictionary or None
+    if the ID cannot be found or if login_as was not passed
+    """
     return users.get(int(user_id))
 
 
 # Define before_request function to execute before all other functions
 @app.before_request
 def before_request():
-    """Check if login_as parameter is present in the request URL."""
+    """Function and use the app.before_request decorator to
+    make it be executed before all other functions. It should use
+    get_user to find a user if any, and set it as a global on flask.g.user.
+    """
     user_id = (request.args.get('login_as', 0))
     g.user = get_user(user_id)
 
