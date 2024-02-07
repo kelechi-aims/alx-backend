@@ -65,33 +65,15 @@ def before_request():
     """ Check if login_as parameter is present in the request URL """
     user_id = request.args.get('login_as')
     if user_id:
-        # Attempt to get user details based on user ID
         user = get_user((user_id))
-        if user:
-            # Set user details as a global on flask.g.user
-            g.user = user
-        else:
-            # If user ID not found, set g.user to None
-            g.user = None
+        g.user = user if user else None
     else:
-        # If login_as parameter not present, set g.user to None
         g.user = None
-
-
-SUPPORTED_TIMEZONES = pytz.timezone
 
 
 @babel.timezoneselector
 def get_timezone():
-    """ Infer appropriate time zone 
-    timezone = request.args.get('timezone')
-    if timezone and timezone in SUPPORTED_TIMEZONES:
-        return timezone
-    if hasattr(g, 'user') and g.user and 'timezone' in g.user and g.user['timezone'] in SUPPORTED_TIMEZONES:
-        return g.user['timezone']
-    return 'UTC'
-    """
-     # Find timezone parameter in URL parameters
+    """Infer appropriate time zone."""
     url_timezone = request.args.get('timezone')
     if url_timezone and is_valid_timezone(url_timezone):
         return url_timezone
@@ -119,7 +101,7 @@ def index() -> str:
 
     formatted_current_time = current_time.strftime("%b %d, %Y, %I:%M:%S %p")
 
-    return render_template('index.html', current_time=_("current_time_is", current_time=formatted_current_time))
+    return render_template('index.html', current_time=formatted_current_time)
 
 
 if __name__ == '__main__':
