@@ -21,7 +21,7 @@ app.config.from_object(Config)
 
 # Define supported locales using request.accept_languages
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """ Check if locale parameter is present in the request URL """
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
@@ -31,7 +31,7 @@ def get_locale():
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """ rendering index html """
     return render_template('4-index.html')
 
