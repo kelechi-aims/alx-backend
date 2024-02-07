@@ -56,7 +56,7 @@ def before_request():
 
 @app.route('/')
 def index() -> str:
-    """ rendering index html """
+    """ Module for rendering index html file"""
     return render_template('5-index.html')
 
 
