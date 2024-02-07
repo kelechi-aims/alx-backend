@@ -4,6 +4,7 @@ from flask import Flask, render_template, g, request
 from flask_babel import Babel, _
 from typing import Dict, Union
 import pytz
+import datetime
 
 
 app = Flask(__name__)
@@ -82,22 +83,43 @@ SUPPORTED_TIMEZONES = pytz.timezone
 
 @babel.timezoneselector
 def get_timezone():
-    """ Infer appropriate time zone """
+    """ Infer appropriate time zone 
     timezone = request.args.get('timezone')
     if timezone and timezone in SUPPORTED_TIMEZONES:
         return timezone
-    if (
-        hasattr(g, 'user') and g.user and 'timezone' in g.user and
-        g.user['timezone'] in SUPPORTED_TIMEZONES
-    ):
+    if hasattr(g, 'user') and g.user and 'timezone' in g.user and g.user['timezone'] in SUPPORTED_TIMEZONES:
         return g.user['timezone']
     return 'UTC'
+    """
+     # Find timezone parameter in URL parameters
+    url_timezone = request.args.get('timezone')
+    if url_timezone and is_valid_timezone(url_timezone):
+        return url_timezone
+
+    # Find time zone from user settings
+    if hasattr(g, 'user') and g.user and 'timezone' in g.user and is_valid_timezone(g.user['timezone']):
+        return g.user['timezone']
+
+    # Default to UTC
+    return 'UTC'
+
+def is_valid_timezone(timezone):
+    """ Check if the provided timezone is valid """
+    try:
+        pytz.timezone(timezone)
+        return True
+    except pytz.exceptions.UnknownTimeZoneError:
+        return False
 
 
 @app.route('/')
 def index() -> str:
     """ rendering index html """
-    return render_template('7-index.html')
+    current_time = datetime.datetime.now(pytz.timezone(get_timezone()))
+
+    formatted_current_time = current_time.strftime("%b %d, %Y, %I:%M:%S %p")
+
+    return render_template('index.html', current_time=_("current_time_is", current_time=formatted_current_time))
 
 
 if __name__ == '__main__':
