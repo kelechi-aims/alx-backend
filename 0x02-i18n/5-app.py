@@ -48,7 +48,7 @@ def get_user(user_id: int) -> Union[Dict[str, Union[str, None]], None]:
 
 # Define before_request function to execute before all other functions
 @app.before_request
-def before_request() -> None:
+def before_request():
     """ Check if login_as parameter is present in the request URL """
     user_id = request.args.get('login_as')
     if user_id:
