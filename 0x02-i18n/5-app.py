@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Mock logging in by creating a user login system """
+"""Mock logging in by creating a user login system"""
 from flask import Flask, render_template, g, request
 from flask_babel import Babel, _
 from typing import Dict, Union
@@ -19,7 +19,7 @@ users = {
 
 
 class Config:
-    """ Supported languages list."""
+    """Configuration class for Flask app."""
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -32,7 +32,7 @@ app.config.from_object(Config)
 # Define supported locales using request.accept_languages
 @babel.localeselector
 def get_locale() -> str:
-    """ Check if locale parameter is present in the request URL """
+    """Check if locale parameter is present in the request URL."""
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
         return locale
@@ -42,21 +42,21 @@ def get_locale() -> str:
 
 # Define get_user function to get user details based on user ID
 def get_user(user_id: int) -> Dict:
-    """ Get user details based on user ID """
+    """Get user details based on user ID"""
     return users.get(int(user_id))
 
 
 # Define before_request function to execute before all other functions
 @app.before_request
 def before_request():
-    """ Check if login_as parameter is present in the request URL """
+    """Check if login_as parameter is present in the request URL."""
     user_id = (request.args.get('login_as', 0))
     g.user = get_user(user_id)
 
 
 @app.route('/')
 def index() -> str:
-    """ Module for rendering index html file"""
+    """Render the index HTML file"""
     return render_template('5-index.html')
 
 
