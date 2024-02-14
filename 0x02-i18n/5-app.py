@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Mock logging in by creating a user login system"""
 from flask import Flask, render_template, g, request
-from flask_babel import Babel, _
+from flask_babel import Babel
 from typing import Dict, Union
 
 
