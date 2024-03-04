@@ -34,7 +34,7 @@ At the end of this project, you are expected to be able to [explain to anyone](h
 
 ## Required Files for the Project
 
-```package.json```
+### package.json
 <details>
   <summary>Click to show/hide file contents</summary>
 ```javascript
@@ -77,7 +77,7 @@ At the end of this project, you are expected to be able to [explain to anyone](h
 </details>
 ```
 
-```.babelrc```
+### .babelrc
 <details>
   <summary>Click to show/hide file contents</summary>
 ```javascript 
