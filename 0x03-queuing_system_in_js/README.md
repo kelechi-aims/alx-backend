@@ -75,8 +75,9 @@ At the end of this project, you are expected to be able to [explain to anyone](h
       "sinon": "^7.5.0"
     }
   }
-</details>
 ```
+</details>
+
 
 ```.babelrc
 
@@ -89,8 +90,8 @@ At the end of this project, you are expected to be able to [explain to anyone](h
     "@babel/preset-env"
   ]
 }
-</details>
 ```
+</details>
 
 ### and…
 Don’t forget to run ```$ npm install``` when you have the ```package.json```
