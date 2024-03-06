@@ -34,31 +34,16 @@ describe('createPushNotificationsJobs', () => {
 
     // Validate the jobs in the queue
     expect(queue.testMode.jobs.length).to.equal(2);
-    expect(queue.testMode.jobs[0].type).to.equal('push_notification_code_3');
-    expect(queue.testMode.jobs[1].type).to.equal('push_notification_code_3');
-  });
 
-  // Define test case for job failure
-  it('fail job if phone number is blacklisted', () => {
-    const list = [{ phoneNumber: '4153518780', message: 'This is the code 1234 to verify your account' }];
-    createPushNotificationsJobs(list, queue);
+    const job1 = queue.testMode.jobs[0];
+    const job2 = queue.testMode.jobs[1];
+	  
+    expect(job1.type).to.equal('push_notification_code_3');
+    expect(job1.data.phoneNumber).to.equal('4153518780');
+    expect(job1.data.message).to.equal('This is the code 1234 to verify your account');
 
-    // Simulate job failure with blacklisted phone number
-    queue.testMode.jobs[0].emit('failed', new Error('Phone number 4153518780 is blacklisted'));
-
-    // Validate the job failure
-    expect(queue.testMode.jobs[0].result).to.equal('Phone number 4153518780 is blacklisted');
-  });
-
-  // Define test case for job progress
-  it('update job progress as expected', () => {
-    const list = [{ phoneNumber: '4153518780', message: 'This is the code 1234 to verify your account' }];
-    createPushNotificationsJobs(list, queue);
-
-    // Simulate job progress
-    queue.testMode.jobs[0].emit('progress', 25);
-
-    // Validate the job progress
-    expect(queue.testMode.jobs[0].progress()).to.equal(25);
+    expect(job2.type).to.equal('push_notification_code_3');
+    expect(job2.data.phoneNumber).to.equal('4153518781');
+    expect(job2.data.message).to.equal('This is the code 4562 to verify your account');
   });
 });

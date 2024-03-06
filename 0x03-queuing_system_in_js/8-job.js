@@ -11,10 +11,14 @@ function createPushNotificationsJobs(jobs, queue) {
   // Iterate over each job in the jobs array
   jobs.forEach((jobData) => {
     // Create a job in the queue push_notification_code_3
-    const job = queue.create('push_notification_code_3', jobData)
-      .save(() => {
+    const job = queue.create('push_notification_code_3', jobData);
+
+    // Create jobs in the queue
+    job.save((error) => {
+      if (!error) {
         console.log(`Notification job created: ${job.id}`);
-      });
+      }
+    });
 
     // Listen for job completion
     job.on('complete', () => {
