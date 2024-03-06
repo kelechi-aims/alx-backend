@@ -88,7 +88,7 @@ app.get('/reserve_product/:itemId', async (req, res) => {
     res.json({ "status":"Product not found" });
     return;
   }
-  const currentQuantity = await getCurrentReservedStockById(itemId);
+  let currentQuantity = await getCurrentReservedStockById(itemId);
   if (currentQuantity === null) currentQuantity = item.initialAvailableQuantity;
 
   if (currentQuantity <= 0) {
